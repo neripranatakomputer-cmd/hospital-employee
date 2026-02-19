@@ -127,6 +127,42 @@
                             </select>
                             @error('jenis_kelamin')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
+
+                        
+<div class="col-md-4">
+    <label class="form-label fw-semibold">Tempat Lahir</label>
+    <input type="text" name="tempat_lahir"
+        value="{{ old('tempat_lahir') }}"
+        class="form-control" placeholder="Kota kelahiran">
+</div>
+
+<div class="col-md-4">
+    <label class="form-label fw-semibold">Tanggal Lahir</label>
+    <input type="date" name="tanggal_lahir"
+        value="{{ old('tanggal_lahir') }}"
+        class="form-control">
+</div>
+
+<div class="col-md-4">
+    <label class="form-label fw-semibold">Golongan Darah</label>
+    <select name="golongan_darah" class="form-select">
+        <option value="">Pilih...</option>
+        @foreach(['A','B','AB','O','A+','A-','B+','B-','AB+','AB-','O+','O-'] as $gd)
+            <option value="{{ $gd }}" {{ old('golongan_darah') === $gd ? 'selected' : '' }}>{{ $gd }}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="col-md-6">
+    <label class="form-label fw-semibold">Status Pernikahan</label>
+    <select name="status_pernikahan" class="form-select">
+        <option value="">Pilih...</option>
+        <option value="belum_menikah" {{ old('status_pernikahan') === 'belum_menikah' ? 'selected' : '' }}>Belum Menikah</option>
+        <option value="menikah"       {{ old('status_pernikahan') === 'menikah'       ? 'selected' : '' }}>Menikah</option>
+        <option value="cerai_hidup"   {{ old('status_pernikahan') === 'cerai_hidup'   ? 'selected' : '' }}>Cerai Hidup</option>
+        <option value="cerai_mati"    {{ old('status_pernikahan') === 'cerai_mati'    ? 'selected' : '' }}>Cerai Mati</option>
+    </select>
+</div>
                     </div>
                 </div>
             </div>

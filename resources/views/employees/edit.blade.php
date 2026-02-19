@@ -39,6 +39,40 @@
                     <div class="col-md-4"><label class="form-label fw-semibold">Nama Gelar</label><input type="text" name="nama_gelar" value="{{ old('nama_gelar', $employee->nama_gelar) }}" class="form-control" placeholder="dr., S.Kep."></div>
                     <div class="col-md-8"><label class="form-label fw-semibold">Nama Lengkap *</label><input type="text" name="nama_lengkap" value="{{ old('nama_lengkap', $employee->nama_lengkap) }}" class="form-control @error('nama_lengkap') is-invalid @enderror" required>@error('nama_lengkap')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
                     <div class="col-md-6"><label class="form-label fw-semibold">Jenis Kelamin *</label><select name="jenis_kelamin" class="form-select" required><option value="L" {{ old('jenis_kelamin', $employee->jenis_kelamin) === 'L' ? 'selected' : '' }}>Laki-laki</option><option value="P" {{ old('jenis_kelamin', $employee->jenis_kelamin) === 'P' ? 'selected' : '' }}>Perempuan</option></select></div>
+                    <div class="col-md-4">
+    <label class="form-label fw-semibold">Tempat Lahir</label>
+    <input type="text" name="tempat_lahir"
+        value="{{ old('tempat_lahir', $employee->tempat_lahir) }}"
+        class="form-control" placeholder="Kota kelahiran">
+</div>
+
+<div class="col-md-4">
+    <label class="form-label fw-semibold">Tanggal Lahir</label>
+    <input type="date" name="tanggal_lahir"
+        value="{{ old('tanggal_lahir', $employee->tanggal_lahir?->format('Y-m-d')) }}"
+        class="form-control">
+</div>
+
+<div class="col-md-4">
+    <label class="form-label fw-semibold">Golongan Darah</label>
+    <select name="golongan_darah" class="form-select">
+        <option value="">Pilih...</option>
+        @foreach(['A','B','AB','O','A+','A-','B+','B-','AB+','AB-','O+','O-'] as $gd)
+            <option value="{{ $gd }}" {{ old('golongan_darah', $employee->golongan_darah) === $gd ? 'selected' : '' }}>{{ $gd }}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="col-md-6">
+    <label class="form-label fw-semibold">Status Pernikahan</label>
+    <select name="status_pernikahan" class="form-select">
+        <option value="">Pilih...</option>
+        <option value="belum_menikah" {{ old('status_pernikahan', $employee->status_pernikahan) === 'belum_menikah' ? 'selected' : '' }}>Belum Menikah</option>
+        <option value="menikah"       {{ old('status_pernikahan', $employee->status_pernikahan) === 'menikah'       ? 'selected' : '' }}>Menikah</option>
+        <option value="cerai_hidup"   {{ old('status_pernikahan', $employee->status_pernikahan) === 'cerai_hidup'   ? 'selected' : '' }}>Cerai Hidup</option>
+        <option value="cerai_mati"    {{ old('status_pernikahan', $employee->status_pernikahan) === 'cerai_mati'    ? 'selected' : '' }}>Cerai Mati</option>
+    </select>
+</div>
                 </div>
             </div></div>
         </div>

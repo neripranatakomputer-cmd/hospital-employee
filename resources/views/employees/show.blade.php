@@ -45,6 +45,45 @@
                         <small class="text-muted d-block">NIK</small>
                         <span class="fw-semibold">{{ $employee->nik }}</span>
                     </div>
+
+                    @if($employee->tanggal_lahir)
+<div class="mb-2">
+    <small class="text-muted d-block">Tempat / Tanggal Lahir</small>
+    <span class="fw-semibold">
+        {{ $employee->tempat_lahir ?? '-' }},
+        {{ $employee->tanggal_lahir->format('d F Y') }}
+        <span class="text-muted">({{ $employee->tanggal_lahir->age }} tahun)</span>
+    </span>
+</div>
+@endif
+
+<div class="mb-2">
+    <small class="text-muted d-block">Status Pernikahan</small>
+    <span class="fw-semibold">
+        @php
+            $statusLabels = [
+                'belum_menikah' => 'Belum Menikah',
+                'menikah'       => 'Menikah',
+                'cerai_hidup'   => 'Cerai Hidup',
+                'cerai_mati'    => 'Cerai Mati',
+            ];
+        @endphp
+        {{ $statusLabels[$employee->status_pernikahan] ?? '-' }}
+    </span>
+</div>
+
+<div class="mb-2">
+    <small class="text-muted d-block">Golongan Darah</small>
+    <span class="fw-semibold">
+        @if($employee->golongan_darah)
+            <span class="badge bg-danger">{{ $employee->golongan_darah }}</span>
+        @else
+            -
+        @endif
+    </span>
+</div>
+
+
                 </div>
 
                 <!-- SIP Status Badge -->

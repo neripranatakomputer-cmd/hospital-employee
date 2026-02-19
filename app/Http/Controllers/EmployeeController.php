@@ -142,6 +142,10 @@ class EmployeeController extends Controller
             'nama_lengkap'        => 'required|string|max:255',
             'nama_gelar'          => 'nullable|string|max:100',
             'jenis_kelamin'       => 'required|in:L,P',
+            'tempat_lahir'      => 'nullable|string|max:100',      // tambah
+            'tanggal_lahir'     => 'nullable|date',                // tambah
+            'status_pernikahan' => 'nullable|in:belum_menikah,menikah,cerai_hidup,cerai_mati', // tambah
+            'golongan_darah'    => 'nullable|in:A,B,AB,O,A+,A-,B+,B-,AB+,AB-,O+,O-',         // tambah
             // Data Kontak
             'no_hp'               => 'nullable|string|max:20',
             'email'               => 'nullable|email|max:255',

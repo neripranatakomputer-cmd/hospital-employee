@@ -12,15 +12,17 @@ class Employee extends Model
 
     protected $fillable = [
         'foto_profil', 'nip', 'nik', 'nama_lengkap', 'nama_gelar', 'jenis_kelamin',
-        'no_hp', 'email', 'alamat',
-        'pendidikan_terakhir', 'nomor_ijazah', 'tahun_lulus_ijazah', 'dokumen_ijazah',
-        'jabatan', 'unit', 'str_file', 'sip_file', 'tmt_sip', 'tat_sip',
-        'is_active',
+    'tempat_lahir', 'tanggal_lahir', 'status_pernikahan', 'golongan_darah', // tambah ini
+    'no_hp', 'email', 'alamat',
+    'pendidikan_terakhir', 'nomor_ijazah', 'tahun_lulus_ijazah', 'dokumen_ijazah',
+    'jabatan', 'unit', 'str_file', 'sip_file', 'tmt_sip', 'tat_sip',
+    'is_active',
     ];
 
     protected $casts = [
         'tmt_sip' => 'date',
         'tat_sip'  => 'date',
+        'tanggal_lahir'  => 'date',
     ];
 
     public function attendances()
