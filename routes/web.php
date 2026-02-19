@@ -34,4 +34,5 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
     // Download Rekap Absensi Routes
     Route::get('/attendance/report/download', [AttendanceController::class, 'downloadReport'])->name('attendance.report.download');
+    Route::get('/attendance/test-machine', [AttendanceController::class, 'testMachine'])->name('attendance.test-machine');
 });

@@ -87,18 +87,32 @@ class AttendanceController extends Controller
         return back()->with('success', 'Data absensi dihapus.');
     }
 
-    public function syncMachine()
-    {
-        try {
-            $service = app(\App\Services\AttendanceMachineService::class);
-            $result = $service->syncAttendance();
+    public function syncMachine(Request $request)
+{
+    try {
+        $service = app(\App\Services\AttendanceMachineService::class);
+        $date    = $request->get('date', today()->format('Y-m-d'));
+        $result  = $service->syncAttendance($date);
 
-            return back()->with('success', "Sinkronisasi berhasil: {$result['synced']} data diimpor.");
-        } catch (\Exception $e) {
-            return back()->with('error', 'Gagal sinkronisasi: ' . $e->getMessage());
+        $msg = "Sync berhasil: {$result['synced']} data baru, {$result['skipped']} dilewati.";
+
+        if (!empty($result['errors'])) {
+            return back()->with('warning', $msg . ' Beberapa NIP tidak ditemukan.');
         }
-    }
 
+        return back()->with('success', $msg);
+
+    } catch (\Exception $e) {
+        return back()->with('error', 'Gagal sync: ' . $e->getMessage());
+    }
+}
+
+public function testMachine()
+{
+    $service = app(\App\Services\AttendanceMachineService::class);
+    $result  = $service->testConnection();
+    return response()->json($result);
+}
     public function report(Request $request)
     {
         $month = $request->get('month', now()->format('Y-m'));

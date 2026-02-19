@@ -8,11 +8,17 @@
         <p class="text-muted small mb-0">Kelola kehadiran karyawan</p>
     </div>
     <div class="d-flex gap-2">
-        <form method="POST" action="{{ route('attendance.sync-machine') }}">
+        <form method="POST" action="{{ route('attendance.sync-machine') }}" class="d-flex gap-2">
             @csrf
-            <button type="submit" class="btn btn-outline-secondary" onclick="return confirm('Sync dari mesin absensi?')">
+            <input type="date" name="date" value="{{ today()->format('Y-m-d') }}" class="form-control form-control-sm" style="width:160px">
+            <button type="submit" class="btn btn-outline-secondary"
+                onclick="return confirm('Sync data absensi dari mesin fingerprint?')">
                 <i class="bi bi-arrow-repeat me-1"></i>Sync Mesin
             </button>
+            <a href="{{ route('attendance.test-machine') }}" target="_blank"
+                class="btn btn-outline-info" title="Test koneksi mesin">
+                <i class="bi bi-wifi"></i>
+            </a>
         </form>
         <a href="{{ route('attendance.create') }}" class="btn btn-primary"><i class="bi bi-plus me-1"></i>Input Absensi</a>
     </div>
@@ -77,11 +83,29 @@
                         <td class="text-muted small">{{ $attendances->firstItem() + $i }}</td>
                         <td>
                             <div class="fw-semibold small">{{ $att->employee?->nama_lengkap ?? '(Karyawan dihapus)' }}</div>
-<div class="text-muted" style="font-size:12px">{{ $att->employee?->jabatan ?? '-' }}</div>
+                            <div class="text-muted" style="font-size:12px">{{ $att->employee?->jabatan ?? '-' }}</div>
                         </td>
                         <td><span class="small">{{ $att->tanggal->format('d/m/Y') }}</span></td>
-                        <td><span class="badge bg-success bg-opacity-15 text-success">{{ $att->jam_masuk ?: '-' }}</span></td>
-                        <td><span class="badge bg-secondary bg-opacity-15 text-secondary">{{ $att->jam_keluar ?: '-' }}</span></td>
+                        
+                        <td>
+    @if($att->jam_masuk)
+        <span class="badge text-success border border-success">
+            <i class="bi bi-clock me-1"></i>{{ $att->jam_masuk }}
+        </span>
+    @else
+        <span class="text-muted small">-</span>
+    @endif
+</td>
+<td>
+    @if($att->jam_keluar)
+        <span class="badge text-secondary border border-secondary">
+            <i class="bi bi-clock-history me-1"></i>{{ $att->jam_keluar }}
+        </span>
+    @else
+        <span class="text-muted small">-</span>
+    @endif
+</td>
+
                         <td>
                             @php $statusColors = ['hadir'=>'success','izin'=>'info','sakit'=>'warning','alpha'=>'danger','cuti'=>'secondary'] @endphp
                             <span class="badge bg-{{ $statusColors[$att->status] ?? 'secondary' }}">{{ ucfirst($att->status) }}</span>
