@@ -2,9 +2,11 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'SIMKA') - Sistem Manajemen Karyawan RS</title>
+    <title>@yield('title', 'SIMKA') - RSUD Kamang Baru</title>
+    
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -158,15 +160,14 @@
 <!-- Sidebar -->
 <nav id="sidebar">
     <div class="sidebar-brand">
-        <div class="d-flex align-items-center gap-2">
-            <div class="bg-primary rounded p-2">
-                <i class="bi bi-hospital text-white fs-5"></i>
-            </div>
-            <div>
-                <h5>SIMKA</h5>
-                <small>Manajemen Karyawan RS</small>
-            </div>
+    <div class="d-flex align-items-center gap-2">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo RSUD Kamang Baru"
+            style="width:48px;height:48px;object-fit:contain;filter:brightness(0) invert(1);">
+        <div>
+            <h5>KAMANG BARU</h5>
+            <small>Rumah Sakit Umum Daerah</small>
         </div>
+    </div>
     </div>
 
     <ul class="nav flex-column pt-2">

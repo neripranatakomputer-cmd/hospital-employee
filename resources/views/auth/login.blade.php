@@ -2,8 +2,9 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SIMKA</title>
+    <title>Login - RSUD Kamang Baru</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
@@ -45,11 +46,10 @@
 <body>
 <div class="login-card">
     <div class="login-header">
-        <div class="icon">
-            <i class="bi bi-hospital text-white" style="font-size: 32px;"></i>
-        </div>
-        <h4 class="text-white mb-1 fw-bold">SIMKA</h4>
-        <p class="text-white-50 mb-0 small">Sistem Manajemen Karyawan Rumah Sakit</p>
+    <img src="{{ asset('images/logo.png') }}" alt="Logo RSUD Kamang Baru"
+        style="width:100px;height:100px;object-fit:contain;filter:brightness(0) invert(1);margin-bottom:12px">
+    <h4 class="text-white mb-1 fw-bold">RSUD KAMANG BARU</h4>
+    <p class="text-white-50 mb-0 small">Sistem Informasi Manajemen Karyawan</p>
     </div>
 
     <div class="login-body">
