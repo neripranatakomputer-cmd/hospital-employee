@@ -12,9 +12,11 @@ class Employee extends Model
 
     protected $fillable = [
         'foto_profil', 'nip', 'nik', 'nama_lengkap', 'nama_gelar', 'jenis_kelamin',
-    'tempat_lahir', 'tanggal_lahir', 'status_pernikahan', 'golongan_darah', // tambah ini
+    'tempat_lahir', 'tanggal_lahir', 'status_pernikahan', 'golongan_darah',
+    'agama', 'golongan_ruang', 'tmt_pns',                    // tambah ini
     'no_hp', 'email', 'alamat',
-    'pendidikan_terakhir', 'nomor_ijazah', 'tahun_lulus_ijazah', 'dokumen_ijazah',
+    'pendidikan_terakhir', 'prodi_pendidikan',                // tambah prodi_pendidikan
+    'nomor_ijazah', 'tahun_lulus_ijazah', 'dokumen_ijazah',
     'jabatan', 'unit', 'str_file', 'sip_file', 'tmt_sip', 'tat_sip',
     'is_active',
     ];
@@ -23,6 +25,7 @@ class Employee extends Model
         'tmt_sip' => 'date',
         'tat_sip'  => 'date',
         'tanggal_lahir'  => 'date',
+        'tmt_pns'       => 'date',   // tambah ini
     ];
 
     public function attendances()

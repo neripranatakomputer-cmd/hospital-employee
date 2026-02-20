@@ -154,6 +154,20 @@
 </div>
 
 <div class="col-md-6">
+    <label class="form-label fw-semibold">Agama</label>
+    <select name="agama" class="form-select">
+        <option value="">Pilih...</option>
+        @foreach(['Islam','Kristen Protestan','Kristen Katolik','Hindu','Buddha','Konghucu'] as $agama)
+            <option value="{{ $agama }}" {{ old('agama') === $agama ? 'selected' : '' }}>{{ $agama }}</option>
+        @endforeach
+    </select>
+</div>
+
+
+
+
+
+<div class="col-md-6">
     <label class="form-label fw-semibold">Status Pernikahan</label>
     <select name="status_pernikahan" class="form-select">
         <option value="">Pilih...</option>
@@ -223,6 +237,14 @@
                         </div>
 
                         <div class="col-md-6">
+                            <label class="form-label fw-semibold">Program Studi</label>
+                            <input type="text" name="prodi_pendidikan"
+                                value="{{ old('prodi_pendidikan') }}"
+                                    class="form-control"
+                                placeholder="Contoh: Keperawatan, Kedokteran Umum, dll">
+                        </div>
+
+                        <div class="col-md-6">
                             <label class="form-label fw-semibold">Tahun Lulus</label>
                             <input type="number" name="tahun_lulus_ijazah"
                                 value="{{ old('tahun_lulus_ijazah', $employee->tahun_lulus_ijazah ?? '') }}"
@@ -274,6 +296,25 @@
                                 value="{{ old('unit', $employee->unit ?? '') }}"
                                 class="form-control" placeholder="IGD, ICU, Radiologi, dll">
                         </div>
+
+                        <div class="col-md-3">
+    <label class="form-label fw-semibold">Golongan Ruang</label>
+    <select name="golongan_ruang" class="form-select">
+        <option value="">Pilih...</option>
+        @foreach(['I/a','I/b','I/c','I/d','II/a','II/b','II/c','II/d','III/a','III/b','III/c','III/d','IV/a','IV/b','IV/c','IV/d','IV/e'] as $gol)
+            <option value="{{ $gol }}" {{ old('golongan_ruang') === $gol ? 'selected' : '' }}>{{ $gol }}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="col-md-3">
+    <label class="form-label fw-semibold">TMT PNS</label>
+    <input type="date" name="tmt_pns"
+        value="{{ old('tmt_pns') }}"
+        class="form-control @error('tmt_pns') is-invalid @enderror">
+    <div class="form-text">Tanggal Mulai Tugas PNS</div>
+    @error('tmt_pns')<div class="invalid-feedback">{{ $message }}</div>@enderror
+</div>
 
                         <!-- STR -->
                         <div class="col-12"><hr class="my-1"><h6 class="text-muted small fw-semibold">STR - Surat Tanda Registrasi</h6></div>

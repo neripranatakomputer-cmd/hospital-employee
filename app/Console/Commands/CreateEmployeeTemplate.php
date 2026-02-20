@@ -25,24 +25,30 @@ class CreateEmployeeTemplate extends Command
 
         $headers = [
             'nip'                => 'NIP',
-            'nik'                => 'NIK',
-            'nama_lengkap'       => 'Nama Lengkap',
-            'nama_gelar'         => 'Nama Gelar',
-            'jenis_kelamin'      => 'Jenis Kelamin (L/P)',
-            'tempat_lahir'       => 'Tempat Lahir',
-            'tanggal_lahir'      => 'Tanggal Lahir (YYYY-MM-DD)',
-            'status_pernikahan'  => 'Status Pernikahan',
-            'golongan_darah'     => 'Golongan Darah',
-            'no_hp'              => 'No. HP',
-            'email'              => 'Email',
-            'alamat'             => 'Alamat',
-            'pendidikan_terakhir'=> 'Pendidikan Terakhir',
-            'nomor_ijazah'       => 'Nomor Ijazah',
-            'tahun_lulus_ijazah' => 'Tahun Lulus',
-            'jabatan'            => 'Jabatan',
-            'unit'               => 'Unit',
-            'tmt_sip'            => 'TMT SIP (YYYY-MM-DD)',
-            'tat_sip'            => 'TAT SIP (YYYY-MM-DD)',
+    'nik'                => 'NIK',
+    'nama_lengkap'       => 'Nama Lengkap',
+    'nama_gelar'         => 'Nama Gelar',
+    'jenis_kelamin'      => 'Jenis Kelamin (L/P)',
+    'tempat_lahir'       => 'Tempat Lahir',
+    'tanggal_lahir'      => 'Tanggal Lahir (YYYY-MM-DD)',
+    'status_pernikahan'  => 'Status Pernikahan',
+    'golongan_darah'     => 'Golongan Darah',
+    'agama'              => 'Agama',              // tambah
+    
+    
+    'no_hp'              => 'No. HP',
+    'email'              => 'Email',
+    'alamat'             => 'Alamat',
+    'pendidikan_terakhir'=> 'Pendidikan Terakhir',
+    'prodi_pendidikan'   => 'Program Studi',      // tambah
+    'nomor_ijazah'       => 'Nomor Ijazah',
+    'tahun_lulus_ijazah' => 'Tahun Lulus',
+    'jabatan'            => 'Jabatan',
+    'unit'               => 'Unit',
+    'golongan_ruang'     => 'Golongan Ruang',     // tambah
+    'tmt_pns'            => 'TMT PNS (YYYY-MM-DD)', // tambah
+    'tmt_sip'            => 'TMT SIP (YYYY-MM-DD)',
+    'tat_sip'            => 'TAT SIP (YYYY-MM-DD)',
         ];
 
         // Tulis header baris 1 (nama kolom untuk sistem/key)
@@ -132,7 +138,7 @@ class CreateEmployeeTemplate extends Command
             ['nip', 'Nomor Induk Pegawai', '19850101001'],
             ['nik', 'NIK KTP 16 digit', '3201010185001001'],
             ['nama_lengkap', 'Nama tanpa gelar', 'Budi Santoso'],
-            ['nama_gelar', 'Gelar akademik', 'dr. / S.Kep. / S.Kom'],
+            ['nama_gelar', 'Gelar akademik', 'dr. Budi Santoso'],
             ['jenis_kelamin', 'Huruf kapital', 'L atau P'],
             ['tempat_lahir', 'Kota kelahiran', 'Bukittinggi'],
             ['tanggal_lahir', 'Format YYYY-MM-DD', '1985-01-01'],

@@ -46,6 +46,20 @@
                             <option value="{{ $gd }}" {{ old('golongan_darah', $employee->golongan_darah) === $gd ? 'selected' : '' }}>{{ $gd }}</option>
                         @endforeach
                         </select></div>
+
+<div class="col-md-6">
+    <label class="form-label fw-semibold">Agama</label>
+    <select name="agama" class="form-select">
+        <option value="">Pilih...</option>
+        @foreach(['Islam','Kristen Protestan','Kristen Katolik','Hindu','Buddha','Konghucu'] as $agama)
+            <option value="{{ $agama }}" {{ old('agama', $employee->agama) === $agama ? 'selected' : '' }}>{{ $agama }}</option>
+        @endforeach
+    </select>
+</div>
+
+
+
+
                     <div class="col-md-6"><label class="form-label fw-semibold">Status Pernikahan</label><select name="status_pernikahan" class="form-select">
                         <option value="">Pilih...</option>
                         <option value="belum_menikah" {{ old('status_pernikahan', $employee->status_pernikahan) === 'belum_menikah' ? 'selected' : '' }}>Belum Menikah</option>
@@ -68,6 +82,13 @@
             <div class="card border-0 shadow-sm"><div class="card-header bg-white"><h6 class="mb-0 fw-bold"><i class="bi bi-mortarboard-fill me-2 text-info"></i>Data Pendidikan</h6></div>
             <div class="card-body"><div class="row g-3">
                 <div class="col-md-6"><label class="form-label fw-semibold">Pendidikan Terakhir</label><select name="pendidikan_terakhir" class="form-select"><option value="">Pilih...</option>@foreach(['SMA/SMK','D3','D4','S1','S2','S3','Profesi'] as $p)<option value="{{ $p }}" {{ old('pendidikan_terakhir',$employee->pendidikan_terakhir)===$p?'selected':'' }}>{{ $p }}</option>@endforeach</select></div>
+                <div class="col-md-6">
+    <label class="form-label fw-semibold">Program Studi</label>
+    <input type="text" name="prodi_pendidikan"
+        value="{{ old('prodi_pendidikan', $employee->prodi_pendidikan) }}"
+        class="form-control"
+        placeholder="Contoh: Keperawatan, Kedokteran Umum, dll">
+</div>
                 <div class="col-md-3"><label class="form-label fw-semibold">Tahun Lulus</label><input type="number" name="tahun_lulus_ijazah" value="{{ old('tahun_lulus_ijazah',$employee->tahun_lulus_ijazah) }}" class="form-control" min="1990" max="{{ date('Y') }}"></div>
                 <div class="col-md-6"><label class="form-label fw-semibold">Nomor Ijazah</label><input type="text" name="nomor_ijazah" value="{{ old('nomor_ijazah',$employee->nomor_ijazah) }}" class="form-control"></div>
                 <div class="col-md-6"><label class="form-label fw-semibold">Dokumen Ijazah</label>@if($employee->dokumen_ijazah)<div class="mb-2"><a href="{{ Storage::url($employee->dokumen_ijazah) }}" target="_blank" class="btn btn-sm btn-outline-info"><i class="bi bi-file-earmark-text me-1"></i>Lihat Ijazah</a></div>@endif<input type="file" name="dokumen_ijazah" class="form-control" accept=".pdf,.jpg,.jpeg,.png"><div class="form-text">Kosongkan jika tidak ingin mengubah</div></div>
@@ -79,6 +100,24 @@
                 <div class="col-md-6"><label class="form-label fw-semibold">Jabatan</label><input type="text" name="jabatan" value="{{ old('jabatan',$employee->jabatan) }}" class="form-control"></div>
                 <div class="col-md-6"><label class="form-label fw-semibold">Unit</label><input type="text" name="unit" value="{{ old('unit',$employee->unit) }}" class="form-control"></div>
                 <div class="col-12"><hr><h6 class="text-muted small">STR</h6></div>
+                <div class="col-md-3">
+    <label class="form-label fw-semibold">Golongan Ruang</label>
+    <select name="golongan_ruang" class="form-select">
+        <option value="">Pilih...</option>
+        @foreach(['I/a','I/b','I/c','I/d','II/a','II/b','II/c','II/d','III/a','III/b','III/c','III/d','IV/a','IV/b','IV/c','IV/d','IV/e'] as $gol)
+            <option value="{{ $gol }}" {{ old('golongan_ruang', $employee->golongan_ruang) === $gol ? 'selected' : '' }}>{{ $gol }}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="col-md-3">
+    <label class="form-label fw-semibold">TMT PNS</label>
+    <input type="date" name="tmt_pns"
+        value="{{ old('tmt_pns', $employee->tmt_pns?->format('Y-m-d')) }}"
+        class="form-control @error('tmt_pns') is-invalid @enderror">
+    <div class="form-text">Tanggal Mulai Tugas PNS</div>
+    @error('tmt_pns')<div class="invalid-feedback">{{ $message }}</div>@enderror
+</div>
                 <div class="col-md-6"><label class="form-label fw-semibold">Upload STR</label>@if($employee->str_file)<div class="mb-2"><a href="{{ Storage::url($employee->str_file) }}" target="_blank" class="btn btn-sm btn-outline-info"><i class="bi bi-file-earmark-text me-1"></i>Lihat STR</a></div>@endif<input type="file" name="str_file" class="form-control" accept=".pdf,.jpg,.jpeg,.png"></div>
                 <div class="col-12"><hr><h6 class="text-muted small">SIP</h6></div>
                 <div class="col-md-6"><label class="form-label fw-semibold">Upload SIP</label>@if($employee->sip_file)<div class="mb-2"><a href="{{ Storage::url($employee->sip_file) }}" target="_blank" class="btn btn-sm btn-outline-info"><i class="bi bi-file-earmark-text me-1"></i>Lihat SIP</a></div>@endif<input type="file" name="sip_file" class="form-control" accept=".pdf,.jpg,.jpeg,.png"></div>

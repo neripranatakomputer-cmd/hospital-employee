@@ -28,7 +28,7 @@
                         {{ strtoupper(substr($employee->nama_lengkap, 0, 1)) }}
                     </div>
                 @endif
-                <h5 class="fw-bold mb-1">{{ $employee->nama_gelar ? $employee->nama_gelar . ' ' : '' }}{{ $employee->nama_lengkap }}</h5>
+                <h5 class="fw-bold mb-1">{{ $employee->nama_gelar ? $employee->nama_gelar . ' ' : '' }}</h5>
                 <p class="text-muted mb-2">{{ $employee->jabatan }} - {{ $employee->unit }}</p>
                 <span class="badge {{ $employee->jenis_kelamin === 'L' ? 'bg-primary' : 'bg-pink' }} bg-opacity-10 text-{{ $employee->jenis_kelamin === 'L' ? 'primary' : 'danger' }} px-3 py-2">
                     {{ $employee->jenis_kelamin === 'L' ? '♂ Laki-laki' : '♀ Perempuan' }}
@@ -83,6 +83,14 @@
     </span>
 </div>
 
+<div class="mb-2">
+    <small class="text-muted d-block">Agama</small>
+    <span class="fw-semibold">{{ $employee->agama ?? '-' }}</span>
+</div>
+
+
+
+
 
                 </div>
 
@@ -110,7 +118,7 @@
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-md-4"><small class="text-muted">No. HP</small><div class="fw-semibold">{{ $employee->no_hp ?: '-' }}</div></div>
-                    <div class="col-md-4"><small class="text-muted">Email</small><div class="fw-semibold">{{ $employee->email ?: '-' }}</div></div>
+                    <div class="col-md-6"><small class="text-muted">Email</small><div class="fw-semibold">{{ $employee->email ?: '-' }}</div></div>
                     <div class="col-12"><small class="text-muted">Alamat</small><div class="fw-semibold">{{ $employee->alamat ?: '-' }}</div></div>
                 </div>
             </div>
@@ -122,6 +130,10 @@
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-md-4"><small class="text-muted">Pendidikan Terakhir</small><div class="fw-semibold">{{ $employee->pendidikan_terakhir ?: '-' }}</div></div>
+                    <div class="col-md-4">
+    <small class="text-muted">Program Studi</small>
+    <div class="fw-semibold">{{ $employee->prodi_pendidikan ?? '-' }}</div>
+</div>
                     <div class="col-md-4"><small class="text-muted">Nomor Ijazah</small><div class="fw-semibold">{{ $employee->nomor_ijazah ?: '-' }}</div></div>
                     <div class="col-md-4"><small class="text-muted">Tahun Lulus</small><div class="fw-semibold">{{ $employee->tahun_lulus_ijazah ?: '-' }}</div></div>
                     @if($employee->dokumen_ijazah)
@@ -138,7 +150,21 @@
                 <div class="row g-3">
                     <div class="col-md-6"><small class="text-muted">Jabatan</small><div class="fw-semibold">{{ $employee->jabatan ?: '-' }}</div></div>
                     <div class="col-md-6"><small class="text-muted">Unit</small><div class="fw-semibold">{{ $employee->unit ?: '-' }}</div></div>
+                    <div class="mb-2">
+    <small class="text-muted d-block">Golongan Ruang</small>
+    <span class="fw-semibold">
+        @if($employee->golongan_ruang)
+            <span class="badge bg-primary">{{ $employee->golongan_ruang }}</span>
+        @else
+            -
+        @endif
+    </span>
+</div>
 
+<div class="mb-2">
+    <small class="text-muted d-block">TMT PNS</small>
+    <span class="fw-semibold">{{ $employee->tmt_pns?->format('d F Y') ?? '-' }}</span>
+</div>    
                     <div class="col-12"><hr class="my-1"></div>
 
                     <div class="col-md-4"><small class="text-muted">TMT SIP</small><div class="fw-semibold">{{ $employee->tmt_sip?->format('d F Y') ?: '-' }}</div></div>

@@ -62,6 +62,10 @@ class EmployeeImport implements ToCollection, WithHeadingRow
                     'unit'                => trim((string) ($row['unit'] ?? '')) ?: null,
                     'tmt_sip'             => $this->parseDate($row['tmt_sip'] ?? null),
                     'tat_sip'             => $this->parseDate($row['tat_sip'] ?? null),
+                    'agama'            => trim((string) ($row['agama'] ?? '')) ?: null,
+'golongan_ruang'   => trim((string) ($row['golongan_ruang'] ?? '')) ?: null,
+'tmt_pns'          => $this->parseDate($row['tmt_pns'] ?? null),
+'prodi_pendidikan' => trim((string) ($row['prodi_pendidikan'] ?? '')) ?: null,
                 ]);
 
                 $this->successCount++;
