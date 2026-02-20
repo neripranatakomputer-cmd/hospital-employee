@@ -107,7 +107,7 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <div class="fw-semibold">{{ $emp->nama_gelar ? $emp->nama_gelar . ' ' : '' }}{{ $emp->nama_lengkap }}</div>
+                                    <div class="fw-semibold">{{ $emp->nama_gelar }}</div>
                                     <div class="text-muted small">{{ $emp->jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan' }}</div>
                                 </div>
                             </div>

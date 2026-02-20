@@ -77,7 +77,7 @@ class CreateEmployeeTemplate extends Command
             '19850101001',          // nip
             '3201010185001001',     // nik
             'Budi Santoso',         // nama_lengkap
-            'dr.',                  // nama_gelar
+            'dr.Budi Santoso',      // nama_gelar
             'L',                    // jenis_kelamin
             'Bukittinggi',          // tempat_lahir
             '1985-01-01',           // tanggal_lahir
