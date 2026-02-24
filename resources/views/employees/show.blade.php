@@ -99,13 +99,82 @@
                     @if(!$employee->tat_sip)
                         <span class="badge bg-secondary px-3 py-2">Tidak Ada SIP</span>
                     @elseif($employee->sip_status === 'kadaluarsa')
-                        <div class="alert alert-danger py-2 small mb-0"><i class="bi bi-x-circle me-1"></i><strong>SIP Kadaluarsa</strong><br>{{ $employee->tat_sip->format('d F Y') }}</div>
+                        <div class="alert alert-danger py-2 small mb-0" style="font-size:13px"><i class="bi bi-x-circle me-1"></i><strong>SIP Kadaluarsa</strong><br>{{ $employee->tat_sip->format('d F Y') }}</div>
                     @elseif($employee->sip_status === 'hampir_kadaluarsa')
-                        <div class="alert alert-warning py-2 small mb-0"><i class="bi bi-exclamation-triangle me-1"></i><strong>SIP Hampir Kadaluarsa</strong><br>{{ $employee->sip_days_left }} hari lagi ({{ $employee->tat_sip->format('d F Y') }})</div>
+                        <div class="alert alert-warning py-2 small mb-0" style="font-size:13px"><i class="bi bi-exclamation-triangle me-1"></i><strong>SIP Hampir Kadaluarsa</strong><br>{{ $employee->sip_days_left }} hari lagi ({{ $employee->tat_sip->format('d F Y') }})</div>
                     @else
-                        <div class="alert alert-success py-2 small mb-0"><i class="bi bi-check-circle me-1"></i><strong>SIP Aktif</strong><br>s.d. {{ $employee->tat_sip->format('d F Y') }}</div>
+                        <div class="alert alert-success py-2 small mb-0" style="font-size:13px"><i class="bi bi-check-circle me-1"></i><strong>SIP Aktif</strong><br>s.d. {{ $employee->tat_sip->format('d F Y') }}</div>
                     @endif
                 </div>
+
+                {{-- Status Kenaikan Pangkat --}}
+@if($employee->tmt_golongan)
+    @php $pangkatStatus = $employee->kenaikan_pangkat_status; @endphp
+    @if($pangkatStatus === 'terlambat')
+        <div class="alert alert-danger py-2 px-3 mt-2 mb-0" style="font-size:13px">
+            <i class="bi bi-arrow-up-circle-fill me-1"></i>
+            <strong>Kenaikan Pangkat Terlambat</strong><br>
+            <small>{{ abs($employee->kenaikan_pangkat_days_left) }} hari melewati batas
+            ({{ $employee->kenaikan_pangkat_due_date->format('d F Y') }})</small>
+        </div>
+    @elseif($pangkatStatus === 'segera')
+        <div class="alert alert-warning py-2 px-3 mt-2 mb-0" style="font-size:13px">
+            <i class="bi bi-arrow-up-circle me-1"></i>
+            <strong>Kenaikan Pangkat Segera</strong><br>
+            <small>{{ $employee->kenaikan_pangkat_days_left }} hari lagi
+            ({{ $employee->kenaikan_pangkat_due_date->format('d F Y') }})</small>
+        </div>
+    @else
+        <div class="alert alert-success py-2 px-3 mt-2 mb-0" style="font-size:13px">
+            <i class="bi bi-arrow-up-circle me-1"></i>
+            <strong>Pangkat Aktif</strong><br>
+            <small>Due {{ $employee->kenaikan_pangkat_due_date->format('d F Y') }}</small>
+        </div>
+    @endif
+@else
+    <div class="mt-2">
+        <span class="badge bg-secondary py-2 px-3" style="font-size:12px;white-space:normal">
+            <i class="bi bi-arrow-up-circle me-1"></i>
+            TMT Golongan belum diinputkan
+        </span>
+    </div>
+@endif
+
+{{-- Status Kenaikan Gaji Berkala --}}
+@if($employee->tmt_golongan)
+    @php $gajiStatus = $employee->kenaikan_gaji_status; @endphp
+    @if($gajiStatus === 'terlambat')
+        <div class="alert alert-danger py-2 px-3 mt-2 mb-0" style="font-size:13px">
+            <i class="bi bi-cash-coin me-1"></i>
+            <strong>Kenaikan Gaji Berkala Terlambat</strong><br>
+            <small>{{ abs($employee->kenaikan_gaji_days_left) }} hari melewati batas
+            ({{ $employee->kenaikan_gaji_due_date->format('d F Y') }})</small>
+        </div>
+    @elseif($gajiStatus === 'segera')
+        <div class="alert alert-warning py-2 px-3 mt-2 mb-0" style="font-size:13px">
+            <i class="bi bi-cash-coin me-1"></i>
+            <strong>Kenaikan Gaji Berkala Segera</strong><br>
+            <small>{{ $employee->kenaikan_gaji_days_left }} hari lagi
+            ({{ $employee->kenaikan_gaji_due_date->format('d F Y') }})</small>
+        </div>
+    @else
+        <div class="alert alert-success py-2 px-3 mt-2 mb-0" style="font-size:13px">
+            <i class="bi bi-cash-coin me-1"></i>
+            <strong>Gaji Berkala Aktif</strong><br>
+            <small>Due {{ $employee->kenaikan_gaji_due_date->format('d F Y') }}</small>
+        </div>
+    @endif
+@else
+    <div class="mt-2">
+        <span class="badge bg-secondary py-2 px-3" style="font-size:12px;white-space:normal">
+            <i class="bi bi-cash-coin me-1"></i>
+            TMT Golongan belum diinputkan
+        </span>
+    </div>
+@endif
+
+
+
             </div>
         </div>
     </div>
@@ -151,20 +220,26 @@
                     <div class="col-md-6"><small class="text-muted">Jabatan</small><div class="fw-semibold">{{ $employee->jabatan ?: '-' }}</div></div>
                     <div class="col-md-6"><small class="text-muted">Unit</small><div class="fw-semibold">{{ $employee->unit ?: '-' }}</div></div>
                     <div class="mb-2">
-    <small class="text-muted d-block">Golongan Ruang</small>
-    <span class="fw-semibold">
-        @if($employee->golongan_ruang)
-            <span class="badge bg-primary">{{ $employee->golongan_ruang }}</span>
-        @else
-            -
-        @endif
-    </span>
-</div>
+                        <small class="text-muted d-block">Golongan Ruang</small>
+                        <span class="fw-semibold">
+                            @if($employee->golongan_ruang)
+                                <span class="badge bg-primary">{{ $employee->golongan_ruang }}</span>
+                            @else
+                            -
+                            @endif
+                        </span>
+                    </div>
 
-<div class="mb-2">
-    <small class="text-muted d-block">TMT PNS</small>
-    <span class="fw-semibold">{{ $employee->tmt_pns?->format('d F Y') ?? '-' }}</span>
-</div>    
+                    <div class="col-md-6">
+                        <small class="text-muted d-block">TMT PNS</small>
+                        <span class="fw-semibold">{{ $employee->tmt_pns?->format('d F Y') ?? '-' }}</span>
+                    </div>    
+
+                    <div class="col-md-6">
+                        <small class="text-muted d-block">TMT Golongan Terakhir</small>
+                        <span class="fw-semibold">{{ $employee->tmt_golongan?->format('d F Y') ?? '-' }}</span>
+                    </div>
+                    
                     <div class="col-12"><hr class="my-1"></div>
 
                     <div class="col-md-4"><small class="text-muted">TMT SIP</small><div class="fw-semibold">{{ $employee->tmt_sip?->format('d F Y') ?: '-' }}</div></div>
