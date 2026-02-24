@@ -100,24 +100,36 @@
                 <div class="col-md-6"><label class="form-label fw-semibold">Jabatan</label><input type="text" name="jabatan" value="{{ old('jabatan',$employee->jabatan) }}" class="form-control"></div>
                 <div class="col-md-6"><label class="form-label fw-semibold">Unit</label><input type="text" name="unit" value="{{ old('unit',$employee->unit) }}" class="form-control"></div>
                 <div class="col-12"><hr><h6 class="text-muted small">STR</h6></div>
-                <div class="col-md-3">
-    <label class="form-label fw-semibold">Golongan Ruang</label>
-    <select name="golongan_ruang" class="form-select">
-        <option value="">Pilih...</option>
-        @foreach(['I/a','I/b','I/c','I/d','II/a','II/b','II/c','II/d','III/a','III/b','III/c','III/d','IV/a','IV/b','IV/c','IV/d','IV/e'] as $gol)
-            <option value="{{ $gol }}" {{ old('golongan_ruang', $employee->golongan_ruang) === $gol ? 'selected' : '' }}>{{ $gol }}</option>
-        @endforeach
-    </select>
-</div>
+        
+        
+        <div class="col-md-3">
+            <label class="form-label fw-semibold">TMT PNS</label>
+            <input type="date" name="tmt_pns"
+            value="{{ old('tmt_pns', $employee->tmt_pns?->format('Y-m-d')) }}"
+            class="form-control @error('tmt_pns') is-invalid @enderror">
+            <div class="form-text">Tanggal Mulai Tugas PNS</div>
+            @error('tmt_pns')<div class="invalid-feedback">{{ $message }}</div>@enderror
+        </div>
 
-<div class="col-md-3">
-    <label class="form-label fw-semibold">TMT PNS</label>
-    <input type="date" name="tmt_pns"
-        value="{{ old('tmt_pns', $employee->tmt_pns?->format('Y-m-d')) }}"
-        class="form-control @error('tmt_pns') is-invalid @enderror">
-    <div class="form-text">Tanggal Mulai Tugas PNS</div>
-    @error('tmt_pns')<div class="invalid-feedback">{{ $message }}</div>@enderror
-</div>
+        <div class="col-md-3">
+            <label class="form-label fw-semibold">Golongan Ruang</label>
+            <select name="golongan_ruang" class="form-select">
+                <option value="">Pilih...</option>
+                @foreach(['I/a','I/b','I/c','I/d','II/a','II/b','II/c','II/d','III/a','III/b','III/c','III/d','IV/a','IV/b','IV/c','IV/d','IV/e'] as $gol)
+                <option value="{{ $gol }}" {{ old('golongan_ruang', $employee->golongan_ruang) === $gol ? 'selected' : '' }}>{{ $gol }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label fw-semibold">TMT Golongan Terakhir</label>
+            <input type="date" name="tmt_golongan"
+            value="{{ old('tmt_golongan', $employee->tmt_golongan?->format('Y-m-d')) }}"
+            class="form-control @error('tmt_golongan') is-invalid @enderror">
+            <div class="form-text">Tanggal Mulai Tugas Golongan</div>
+            @error('tmt_golongan')<div class="invalid-feedback">{{ $message }}</div>@enderror
+        </div>
+
                 <div class="col-md-6"><label class="form-label fw-semibold">Upload STR</label>@if($employee->str_file)<div class="mb-2"><a href="{{ Storage::url($employee->str_file) }}" target="_blank" class="btn btn-sm btn-outline-info"><i class="bi bi-file-earmark-text me-1"></i>Lihat STR</a></div>@endif<input type="file" name="str_file" class="form-control" accept=".pdf,.jpg,.jpeg,.png"></div>
                 <div class="col-12"><hr><h6 class="text-muted small">SIP</h6></div>
                 <div class="col-md-6"><label class="form-label fw-semibold">Upload SIP</label>@if($employee->sip_file)<div class="mb-2"><a href="{{ Storage::url($employee->sip_file) }}" target="_blank" class="btn btn-sm btn-outline-info"><i class="bi bi-file-earmark-text me-1"></i>Lihat SIP</a></div>@endif<input type="file" name="sip_file" class="form-control" accept=".pdf,.jpg,.jpeg,.png"></div>

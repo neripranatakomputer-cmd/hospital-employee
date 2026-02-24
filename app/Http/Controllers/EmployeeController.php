@@ -162,6 +162,7 @@ class EmployeeController extends Controller
             'sip_file'            => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
             'tmt_sip'             => 'nullable|date',
             'tat_sip'             => 'nullable|date|after_or_equal:tmt_sip',
+            'tmt_golongan'        => 'nullable|date',
 
             // Data Pribadi - tambahkan setelah golongan_darah
             'agama'               => 'nullable|string|max:50',

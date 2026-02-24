@@ -18,7 +18,7 @@ class Employee extends Model
     'pendidikan_terakhir', 'prodi_pendidikan',                // tambah prodi_pendidikan
     'nomor_ijazah', 'tahun_lulus_ijazah', 'dokumen_ijazah',
     'jabatan', 'unit', 'str_file', 'sip_file', 'tmt_sip', 'tat_sip',
-    'is_active',
+    'is_active', 'tmt_golongan',
     ];
 
     protected $casts = [
@@ -26,7 +26,8 @@ class Employee extends Model
         'tat_sip'  => 'date',
         'tanggal_lahir'  => 'date',
         'tmt_pns'       => 'date',   // tambah ini
-    ];
+        'tmt_golongan' => 'date',  // tambah ini
+        ];
 
     public function attendances()
     {
@@ -67,4 +68,79 @@ class Employee extends Model
         return $query->whereNotNull('tat_sip')
             ->whereDate('tat_sip', '<', now());
     }
+
+    // ── Notifikasi Kenaikan Pangkat (setiap 3 tahun) ──────────────
+public function getKenaikanPangkatStatusAttribute(): string
+{
+    if (!$this->tmt_golongan) return 'tidak_ada';
+
+    $dueDate  = $this->tmt_golongan->copy()->addYears(3);
+    $daysLeft = now()->diffInDays($dueDate, false);
+
+    if ($daysLeft < 0)   return 'terlambat';
+    if ($daysLeft <= 90) return 'segera';    // 3 bulan sebelum
+    return 'belum';
+}
+
+public function getKenaikanPangkatDueDateAttribute(): ?\Carbon\Carbon
+{
+    return $this->tmt_golongan ? $this->tmt_golongan->copy()->addYears(3) : null;
+}
+
+public function getKenaikanPangkatDaysLeftAttribute(): int
+{
+    if (!$this->tmt_golongan) return 0;
+    return (int) now()->diffInDays($this->tmt_golongan->copy()->addYears(3), false);
+}
+
+// ── Notifikasi Kenaikan Gaji Berkala (setiap 2 tahun) ─────────
+public function getKenaikanGajiStatusAttribute(): string
+{
+    if (!$this->tmt_golongan) return 'tidak_ada';
+
+    $dueDate  = $this->tmt_golongan->copy()->addYears(2);
+    $daysLeft = now()->diffInDays($dueDate, false);
+
+    if ($daysLeft < 0)   return 'terlambat';
+    if ($daysLeft <= 90) return 'segera';
+    return 'belum';
+}
+
+public function getKenaikanGajiDueDateAttribute(): ?\Carbon\Carbon
+{
+    return $this->tmt_golongan ? $this->tmt_golongan->copy()->addYears(2) : null;
+}
+
+public function getKenaikanGajiDaysLeftAttribute(): int
+{
+    if (!$this->tmt_golongan) return 0;
+    return (int) now()->diffInDays($this->tmt_golongan->copy()->addYears(2), false);
+}
+
+// ── Scopes ────────────────────────────────────────────────────
+public function scopeKenaikanPangkatSegera($query, int $days = 90)
+{
+    return $query->whereNotNull('tmt_golongan')
+        ->whereDate('tmt_golongan', '<=', now()->subYears(3)->addDays($days))
+        ->whereDate('tmt_golongan', '>', now()->subYears(3));
+}
+
+public function scopeKenaikanPangkatTerlambat($query)
+{
+    return $query->whereNotNull('tmt_golongan')
+        ->whereDate('tmt_golongan', '<', now()->subYears(3));
+}
+
+public function scopeKenaikanGajiSegera($query, int $days = 90)
+{
+    return $query->whereNotNull('tmt_golongan')
+        ->whereDate('tmt_golongan', '<=', now()->subYears(2)->addDays($days))
+        ->whereDate('tmt_golongan', '>', now()->subYears(2));
+}
+
+public function scopeKenaikanGajiTerlambat($query)
+{
+    return $query->whereNotNull('tmt_golongan')
+        ->whereDate('tmt_golongan', '<', now()->subYears(2));
+}
 }

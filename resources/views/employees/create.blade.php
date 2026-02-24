@@ -104,18 +104,18 @@
                             @error('nik')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
-                        <div class="col-md-4">
-                            <label class="form-label fw-semibold">Nama Gelar</label>
-                            <input type="text" name="nama_gelar" value="{{ old('nama_gelar', $employee->nama_gelar ?? '') }}"
-                                class="form-control" placeholder="dr., S.Kep., dll">
-                        </div>
-
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <label class="form-label fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
                             <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap', $employee->nama_lengkap ?? '') }}"
                                 class="form-control @error('nama_lengkap') is-invalid @enderror"
                                 placeholder="Nama lengkap tanpa gelar" required>
                             @error('nama_lengkap')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Nama Gelar</label>
+                            <input type="text" name="nama_gelar" value="{{ old('nama_gelar', $employee->nama_gelar ?? '') }}"
+                                class="form-control" placeholder="Nama lengkap dengan gelar dr., S.Kep., dll">
                         </div>
 
                         <div class="col-md-6">
@@ -298,23 +298,34 @@
                         </div>
 
                         <div class="col-md-3">
-    <label class="form-label fw-semibold">Golongan Ruang</label>
-    <select name="golongan_ruang" class="form-select">
-        <option value="">Pilih...</option>
-        @foreach(['I/a','I/b','I/c','I/d','II/a','II/b','II/c','II/d','III/a','III/b','III/c','III/d','IV/a','IV/b','IV/c','IV/d','IV/e'] as $gol)
-            <option value="{{ $gol }}" {{ old('golongan_ruang') === $gol ? 'selected' : '' }}>{{ $gol }}</option>
-        @endforeach
-    </select>
-</div>
+                            <label class="form-label fw-semibold">TMT PNS</label>
+                            <input type="date" name="tmt_pns"
+                                value="{{ old('tmt_pns') }}"
+                                class="form-control @error('tmt_pns') is-invalid @enderror">
+                                <div class="form-text">Tanggal Mulai Tugas PNS</div>
+                                @error('tmt_pns')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        </div>
 
-<div class="col-md-3">
-    <label class="form-label fw-semibold">TMT PNS</label>
-    <input type="date" name="tmt_pns"
-        value="{{ old('tmt_pns') }}"
-        class="form-control @error('tmt_pns') is-invalid @enderror">
-    <div class="form-text">Tanggal Mulai Tugas PNS</div>
-    @error('tmt_pns')<div class="invalid-feedback">{{ $message }}</div>@enderror
-</div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">Golongan Ruang</label>
+                            <select name="golongan_ruang" class="form-select">
+                            <option value="">Pilih...</option>
+                            @foreach(['I/a','I/b','I/c','I/d','II/a','II/b','II/c','II/d','III/a','III/b','III/c','III/d','IV/a','IV/b','IV/c','IV/d','IV/e'] as $gol)
+                            <option value="{{ $gol }}" {{ old('golongan_ruang') === $gol ? 'selected' : '' }}>{{ $gol }}</option>
+                            @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">TMT Golongan Terakhir</label>
+                            <input type="date" name="tmt_golongan"
+                            value="{{ old('tmt_golongan') }}"
+                            class="form-control @error('tmt_golongan') is-invalid @enderror">
+                            <div class="form-text">Tanggal Mulai Tugas Golongan</div>
+                            @error('tmt_golongan')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        </div>
+
+                        
 
                         <!-- STR -->
                         <div class="col-12"><hr class="my-1"><h6 class="text-muted small fw-semibold">STR - Surat Tanda Registrasi</h6></div>

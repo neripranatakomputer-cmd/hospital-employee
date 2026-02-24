@@ -185,15 +185,25 @@
             </a>
         </li>
 
-        <li class="nav-item">
-            <a href="{{ route('employees.sip-alerts') }}" class="nav-link {{ request()->routeIs('employees.sip-alerts') ? 'active' : '' }}">
-                <i class="bi bi-bell"></i> Notifikasi SIP
-                @php $sipCount = \App\Models\Employee::expiringSip(30)->count() + \App\Models\Employee::expiredSip()->count() @endphp
-                @if($sipCount > 0)
-                    <span class="badge bg-danger ms-auto">{{ $sipCount }}</span>
-                @endif
-            </a>
-        </li>
+    @php
+        $totalNotifAll = \App\Models\Employee::expiredSip()->count()
+        + \App\Models\Employee::expiringSip(30)->count()
+        + \App\Models\Employee::kenaikanPangkatTerlambat()->count()
+        + \App\Models\Employee::kenaikanPangkatSegera(90)->count()
+        + \App\Models\Employee::kenaikanGajiTerlambat()->count()
+        + \App\Models\Employee::kenaikanGajiSegera(90)->count();
+    @endphp
+    <li class="nav-item">
+        <a href="{{ route('notifications.index') }}"
+            class="nav-link {{ request()->routeIs('notifications.*') ? 'active' : '' }}">
+            <i class="bi bi-bell-fill"></i> Notifikasi Kepegawaian
+            @if($totalNotifAll > 0)
+                <span class="badge bg-danger ms-auto">{{ $totalNotifAll }}</span>
+            @endif
+        </a>
+    </li>
+
+     
 
         <li class="sidebar-section-title">Absensi</li>
 

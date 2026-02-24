@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NotificationController;
 
 // Auth Routes
 Route::middleware('guest')->group(function () {
@@ -35,4 +36,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
     // Download Rekap Absensi Routes
     Route::get('/attendance/report/download', [AttendanceController::class, 'downloadReport'])->name('attendance.report.download');
     Route::get('/attendance/test-machine', [AttendanceController::class, 'testMachine'])->name('attendance.test-machine');
+
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 });

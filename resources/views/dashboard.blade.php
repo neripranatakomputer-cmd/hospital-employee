@@ -73,46 +73,23 @@
 
 <div class="row g-3">
     <!-- SIP Alerts -->
-    <div class="col-md-6">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-bottom d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 fw-bold"><i class="bi bi-bell-fill text-warning me-2"></i>Notifikasi SIP</h6>
-                <a href="{{ route('employees.sip-alerts') }}" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
-            </div>
-            <div class="card-body p-0">
-                @forelse($sipAlerts as $emp)
-                <div class="d-flex align-items-center px-3 py-2 border-bottom">
-                    <div class="flex-shrink-0 me-3">
-                        @if($emp->foto_profil)
-                            <img src="{{ Storage::url($emp->foto_profil) }}" class="rounded-circle" width="36" height="36" style="object-fit:cover">
-                        @else
-                            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width:36px;height:36px;font-size:14px">
-                                {{ strtoupper(substr($emp->nama_lengkap, 0, 1)) }}
-                            </div>
-                        @endif
-                    </div>
-                    <div class="flex-grow-1">
-                        <div class="fw-semibold small">{{ $emp->nama_lengkap }}</div>
-                        <div class="text-muted" style="font-size:12px">{{ $emp->jabatan }} - {{ $emp->unit }}</div>
-                    </div>
-                    <div class="text-end">
-                        @if($emp->sip_status === 'kadaluarsa')
-                            <span class="badge bg-danger">Kadaluarsa</span>
-                        @else
-                            <span class="badge bg-warning text-dark">{{ $emp->sip_days_left }} hari</span>
-                        @endif
-                        <div class="text-muted" style="font-size:11px">{{ $emp->tat_sip?->format('d/m/Y') }}</div>
-                    </div>
+    
+
+    <div class="col-6 col-md-3">
+    <div class="card stat-card h-100 border-0 shadow-sm">
+        <div class="card-body">
+            <div class="d-flex align-items-center gap-3">
+                <div class="rounded-3 p-3 bg-danger bg-opacity-10">
+                    <i class="bi bi-arrow-up-circle-fill text-danger fs-4"></i>
                 </div>
-                @empty
-                <div class="text-center text-muted py-4">
-                    <i class="bi bi-check-circle text-success fs-3 d-block mb-2"></i>
-                    Tidak ada notifikasi SIP
+                <div>
+                    <div class="fs-3 fw-bold text-dark">{{ $totalAlert }}</div>
+                    <div class="text-muted small">Notif Kepegawaian</div>
                 </div>
-                @endforelse
             </div>
         </div>
     </div>
+</div>
 
     <!-- Recent Employees -->
     <div class="col-md-6">

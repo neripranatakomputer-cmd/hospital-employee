@@ -16,6 +16,12 @@ class Kernel extends ConsoleKernel
         // $schedule->command('attendance:sync-machine')->everyThirtyMinutes();
     }
 
+    protected function schedule(Schedule $schedule): void
+    {
+        $schedule->command('sip:check-expiry')->dailyAt('08:00');
+        $schedule->command('kepegawaian:check-notification')->dailyAt('08:05'); // tambah ini
+    }
+
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
