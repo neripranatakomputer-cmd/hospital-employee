@@ -54,43 +54,25 @@
         </div>
     </div>
 
-    <div class="col-6 col-md-3">
+     <div class="col-6 col-md-3">
         <div class="card stat-card h-100 border-0 shadow-sm">
             <div class="card-body">
                 <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-3 p-3 bg-warning bg-opacity-10">
-                        <i class="bi bi-exclamation-triangle-fill text-warning fs-4"></i>
-                    </div>
-                    <div>
-                        <div class="fs-3 fw-bold text-dark">{{ $sipExpiring + $sipExpired }}</div>
-                        <div class="text-muted small">Alert SIP</div>
-                    </div>
-                </div>
+            <div class="rounded-3 p-3 bg-danger bg-opacity-10">
+                <i class="bi bi-arrow-up-circle-fill text-danger fs-4"></i>
+            </div>
+            <div>
+                <div class="fs-3 fw-bold text-dark">{{ $totalAlert }}</div>
+                <div class="text-muted small">Notif Kepegawaian</div>
             </div>
         </div>
     </div>
+    </div>
+
 </div>
 
 <div class="row g-3">
-    <!-- SIP Alerts -->
     
-
-    <div class="col-6 col-md-3">
-    <div class="card stat-card h-100 border-0 shadow-sm">
-        <div class="card-body">
-            <div class="d-flex align-items-center gap-3">
-                <div class="rounded-3 p-3 bg-danger bg-opacity-10">
-                    <i class="bi bi-arrow-up-circle-fill text-danger fs-4"></i>
-                </div>
-                <div>
-                    <div class="fs-3 fw-bold text-dark">{{ $totalAlert }}</div>
-                    <div class="text-muted small">Notif Kepegawaian</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
     <!-- Recent Employees -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
